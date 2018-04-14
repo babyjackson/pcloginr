@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>注册</title>
+		<link rel="stylesheet" href="css/loginr.css" />
+	  	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+	</head>
+	<body>
+		<div class="loginrCon">
+			 <div class="h-55"></div>
+			 <div class="registerW clearfix">
+			 	<div class="register fl">
+			 		<div class="registerf">
+			 			<div class="h-30"></div>
+			 			<ul class="chagetit clearfix">
+				 			<li class="on">个人注册</li>
+				 			<li>企业注册</li>
+				 		</ul>
+				 		<div class="h-30"></div>
+				 		<div class="registers">
+				 			<form id="registFromgr">
+				 				<div class="section">
+				 					<input type="text" name="ptel" placeholder="手机号" id="ptel"/>
+				 				</div>
+				 				<div class="h-20"></div>
+				 				<div class="verifyW cleafix">
+									<div class="vinput fl">
+										<input type="text" name="pverify" placeholder="输入验证码"/>
+									</div>
+									<div class="cbtn fr">
+										<input type="button" value="短信验证" id="gaincodebtngr"/>
+									</div>	
+								</div>
+				 				<div class="h-20"></div>
+				 				<div class="section">
+				 					<input type="password" name="ppsd" placeholder="密码6-16位，数字/字母/字符至少两种"/>
+      								<a href="javascript:;" class="psdchange"></a>
+				 				</div>
+				 				<div class="h-20"></div>
+				 				<div class="section">
+				 					<input type="password" name="pqrpsd" placeholder="确认密码"/>
+      								<a href="javascript:;" class="psdchange"></a>
+				 				</div>
+				 				<div class="h-25"></div>
+								<div class="retips">注册中国麻辣门户，即表示您同意<a href="javascript:;">用户协议</a></div>
+								<div class="h-15"></div>
+								<div class="submitBtn">
+									<a href="javascript:;" class="registsubmitgr">注册</a>
+								</div>
+								<div class="h-20"></div>
+								<div class="dltips fr">
+									<a href="javascript:;" class="fr"><i class="fr"></i>登录</a>
+								</div>
+								<div class="h-15"></div>
+								<div class="h-35"></div>
+				 			</form>
+				 		</div>
+				 		<div class="registers" style="display: none;">
+				 			<form id="registFromqy">
+				 				<div class="section">
+				 					<input type="text" name="ctel" placeholder="手机号" id="ctel"/>
+				 				</div>
+				 				<div class="h-20"></div>
+				 				<div class="verifyW cleafix">
+									<div class="vinput fl">
+										<input type="text" name="cverify" placeholder="输入验证码"/>
+									</div>
+									<div class="cbtn fr">
+										<input type="button" value="短信验证" id="gaincodebtnqy"/>
+									</div>	
+								</div>
+				 				<div class="h-20"></div>
+				 				<div class="section">
+				 					<input type="password" name="cpsd" placeholder="密码6-16位，数字/字母/字符至少两种"/>
+      								<a href="javascript:;" class="psdchange"></a>
+				 				</div>
+				 				<div class="h-20"></div>
+				 				<div class="section">
+				 					<input type="text" name="firmname" placeholder="企业名称"/>
+      							</div>
+				 				<div class="h-20"></div>
+				 				<div class="section">
+				 					<input type="text" name="cemail" placeholder="电子邮箱"/>
+      							</div>
+				 				<div class="h-20"></div>
+				 				<div class="section">
+				 					<input type="text" name="caddr" placeholder="详细地址"/>
+      							</div>
+				 				<div class="h-25"></div>
+								<div class="retips">注册中国麻辣门户，即表示您同意<a href="javascript:;">用户协议</a></div>
+								<div class="h-15"></div>
+								<div class="submitBtn">
+									<a href="javascript:;" class="registsubmitqy">注册</a>
+								</div>
+								<div class="h-20"></div>
+								<div class="dltips fr">
+									<a href="javascript:;" class="fr"><i class="fr"></i>登录</a>
+								</div>
+								<div class="h-15"></div>
+								<div class="h-35"></div>
+				 			</form>
+				 		</div>
+			 		</div>
+			 	</div>
+			 	<div class="banr fr">
+			 		<div class="banimg">
+						<img src="img/loginrbanr.png"/>
+					</div>
+			 	</div>
+			 </div>
+			 <div class="h-40"></div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var remail= /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/; 
+		var rpsd = /^(?:([a-z])|([A-Z])|([0-9])|(.)){5,}|(.)+$/g;
+		$(".psdchange").click(function(){
+			var $this = $(this);
+			var thisv = $(this).hasClass("invisible");
+			var inputv = $this.parent(".section").find("input");
+			if(thisv){
+				$this.removeClass("invisible");
+				inputv.prop('type','password');
+			}else{
+				$this.addClass("invisible");
+				inputv.prop('type','text');
+			}
+		});
+		
+		var registerh = $(".register").height();
+		var banrh = $(".banr");
+		banrh.css({height:registerh});
+		$(".chagetit>li").click(function(){
+			var inx = $(this).index();
+			$(this).addClass("on").siblings().removeClass("on");
+			$(".registers").hide(0);
+			$(".registers").eq(inx).show(0);
+			var registerh = $(".register").height();
+			var banrh = $(".banr");
+			banrh.css({height:registerh});
+		})
+		
+		$(".registsubmitgr").click(function(){
+			registgr();
+		})
+		/**个人**/
+		var registgr = function(){
+			var registFromgr=document.getElementById("registFromgr");
+			var ptel = registFromgr.ptel.value;
+			var ppsd = registFromgr.ppsd.value;
+			var pqrpsd = registFromgr.pqrpsd.value;
+			var pverify = registFromgr.pverify.value;
+			var warn = "";
+			if(ptel == ""){
+				warn = "手机号不能为空";
+				//console.log(warn);
+				return;
+			}
+			if(!/(^1[3|5|8][0-9]{9}$)/.test(ptel)){
+				warn = "手机格式不正确";
+				//console.log(warn);
+				return;
+			}
+			if(pverify == ""){
+				warn = "验证码不能为空";
+				console.log(warn);
+				return;
+			}
+			if(ppsd == ""){
+				warn = "密码不能为空";
+				//console.log(warn);
+				return;
+			}
+			if(pqrpsd == ""){
+				warn = "请再次输入密码";
+				//console.log(warn);
+				return;
+			}
+			if(ppsd != pqrpsd){
+				warn = "两次密码输入不一致";
+				//console.log(warn);
+				return;
+			}
+			if(/(^1[3|5|8][0-9]{9}$)/.test(ptel) && ppsd != "" && pverify != "" && ppsd == pqrpsd){
+				$.ajax({
+					type:"post",
+					url:"",
+					dataType:"json",
+					data:{tel:tel,psd:psd},
+					async:true,
+					success:function(data){
+						
+					}
+				})
+			}
+		}
+		/**企业**/
+		var registgr = function(){
+			var registFromqy=document.getElementById("registFromqy");
+			var ctel = registFromqy.ctel.value;
+			var cpsd = registFromqy.cpsd.value;
+			var cverify = registFromqy.cverify.value;
+			var firmname = registFromqy.firmname.value;
+			var cemail = registFromqy.cemail.value;
+			var caddr = registFromqy.caddr.value;
+			var warn = "";
+			if(ctel == ""){
+				warn = "手机号不能为空";
+				//console.log(warn);
+				return;
+			}
+			if(!/(^1[3|5|8][0-9]{9}$)/.test(ctel)){
+				warn = "手机格式不正确";
+				//console.log(warn);
+				return;
+			}
+			if(cverify == ""){
+				warn = "验证码不能为空";
+				console.log(warn);
+				return;
+			}
+			if(cpsd == ""){
+				warn = "密码不能为空";
+				//console.log(warn);
+				return;
+			}
+			if(!rpsd.test(cpsd)){
+				warn = "密码必须是数字/字母/字符组合";
+				//console.log(warn);
+				return;
+			}
+			if(firmname == ""){
+				warn = "输入企业名称";
+				//console.log(warn);
+				return;
+			}
+			if(cemail == ""){
+				warn = "电子邮件不能为空";
+				//console.log(warn);
+				return;
+			}
+			if(!remail.test(cemail)){
+				warn = "电子邮件格式不正确";
+				//console.log(warn);
+				return;
+			}
+			if(caddr == ""){
+				wran = "输入详细地址";
+				return;
+			}
+			if(/(^1[3|5|8][0-9]{9}$)/.test(ctel) && cpsd != "" && cverify != "" &&firmname !=""&&cemail!=""&&caddr!=""){
+				$.ajax({
+					type:"post",
+					url:"",
+					dataType:"json",
+					data:{tel:tel,psd:psd},
+					async:true,
+					success:function(data){
+						
+					}
+				})
+			}
+		}
+		
+		$("#gaincodebtnqy").click(function(){
+			sendTime("#gaincodebtnqy","registFromqy","ctel");
+		})
+		$("#gaincodebtngr").click(function(){
+			sendTime("#gaincodebtngr","registFromgr","ptel");
+		})
+		function sendTime(btn,form,tel){
+			var registFromgr=document.getElementById(form);
+			var phone = document.getElementById(tel).value;
+			if(!/(^1[3|5|8][0-9]{9}$)/.test(phone)){
+				return false;
+			}else{
+				var time = 30;
+				function timeCountDown(){
+					if(time==0){
+						$(btn).removeAttr("disabled");
+						$(btn).val("验证码");
+						clearInterval(timer);
+						return true;
+					}
+					$(btn).attr("disabled","disabled");
+					$(btn).val(time+"秒");
+					time--;
+					return false;
+				}
+				timeCountDown();
+				var timer = setInterval(timeCountDown,1000);
+			}
+		}
+		
+	</script>
+</html>
